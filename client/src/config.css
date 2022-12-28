@@ -1,0 +1,57 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+:root {
+  font-size: 62.5%;
+  --color-bgd: #E8DCCA;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-primary: #0f749c;
+  --color-secondary: #161925;
+}
+
+/* IMPORT PAGES */
+@import url('./pages/homepage/homepage.css');
+@import url('./pages/productpage/productpage.css');
+@import url('./pages/profilepage/profile.css');
+@import url('./pages/orderpage/order.css');
+
+/* IMPORT COMPONENTS */
+@import url('./components/navigation/navigation.css');
+@import url('./components/product/card.css');
+
+
+
+#homepage,
+#productpage,
+#orderpage,
+#profilepage {
+  background-color: var(--color-bgd);
+  display: grid;
+}
+
+#homepage,
+#productpage,
+#orderpage,
+#profilepage {
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: 80px auto;
+  grid-template-areas: 
+  "nav nav nav nav"
+  "content content content content"
+  ;
+}
+
+#homepage-main,
+#productpage-main,
+#orderpage-main,
+#profilepage-main {
+  grid-area: content;
+}

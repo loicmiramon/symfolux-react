@@ -1,0 +1,90 @@
+
+#####################`PARTIE USERS`#####################
+
+- Différents rôles sur la plateforme : Réfléchir à des rôles spécifique d'une entreprise
+
+  - Patron : 
+    - Aura tous les accès à la plateforme et ainsi que les pleins les pleins pouvoirs
+  - Administrateur : 
+    - Aura accès à certaines sections de la plateforme  et à certain pouvoir donné par le Patron
+  - Employé : 
+    - Aura accès à certaines sections de la plateforme
+
+- Les utilisateurs pourrons avoir leur compte désactivé par le patron
+
+
+#####################`PARTIE BDD USERS`#####################
+
+CREATE TABLE users (
+  id_users BIGSERIAL NOT NULL,
+  lastname VARCHR(100) NOT NULL,
+  firstname VARCHAR(100) NOT NULL,
+  email VARCHAR(150) NOT NULL,
+  password VARCHAR(50) NOT NULL,
+  phone INTEGER NOT NULL,
+  permission VARCHAR(50) NOT NULL,
+  picture VARCHAR(250),
+  account_state BOOLEAN NOT NULL,
+  job VARCHAR(100) NOT NULL
+)
+
+- L'email et le password permet à l'employé de se connecter sur la plateforme. 
+  - Le patron recevra les informations de son compte par email une fois l'abonnement de la plateforme pris.
+  - Le patron devra créer les comptes de ses employés qui pourront modifier le mot de passe VIA leur paramètre du compte
+
+- Le patron pourra Activer/Désactiver le compte de ses employés `colonne : account_state`
+- Divers informations sur l'employé pourra être rempli VIA ses paramètre du comptes
+
+- Divers rôle seront sur la platforme, le patron pourra les changer selon son organisation (partie encore à réfléchir selon ce qu'il y aura sur la plateforme)
+
+#####################`PARTIE DOCUMENTS`#####################
+
+- Possibilité de stocker les documents de différent type :
+  - Devis
+  - Facture
+  - Paie
+  - Contrat :
+    - Les contrats seront accessible uniquement par le Patron (ainsi qu'à l'employé concerné)
+- Possibilité d'enregistrer / imprimer les documents
+- Possibilité de donner accès à des documents ou non à certain rôle de la plateforme lors de l'enregistrement du document
+- Les employés auront accès uniquement à leurs documents ainsi que ceux dont ils ont été ajouté en collaborateur
+
+
+
+#####################`PARTIE BDD DOCUMENTS`#####################
+
+CREATE TABLE documents (
+  id_docs BIGSERIAL NOT NULL,
+  dates DATE NOT NULL,
+  id_user INTEGER NOT NULL,
+  business_customer VARCHAR(50) NOT NULL,
+  documents VARCHAR(250) NOT NULL,
+  category_doc INTEGER NOT NULL
+)
+
+
+- Cette partie conçerne le stockage des documents de l'entreprise
+  - Chaque document aura une catégorie (Devis, Facture, Contrat)
+  - Chaque document contiendra des informations : 
+    - Qui l'a posté (id_user)
+    - la date à laquelle il a été posté (dates)
+    - qu'elle entreprise elle concerne (business_customer)
+    - Le document enregistré et relier à la TABLE `category_document` (documents)
+    - La catégorie du document (category_doc) !!La catégorie sera une table à part donc une liaison à faire!!
+
+
+#####################`PARTIE CATEGORIE`#####################
+
+CREATE TABLE category_document (
+  id_category BIGSERIAL NOT NULL,
+  category_name VARCHAR(50) NOT NULL,
+)
+
+
+#####################`PARTIE CALENDAR`#####################
+
+- Chaque rôle pourra se servir du calendrier
+- Chaque membres aura accès uniquement à ses rendez-vous et à ceux auquelles ils sont en collaboration
+- Le patron 
+- Possibilité d'ajouter / modifier / supprimer un rendez vous (uniquement par le dépositaire ou le Patron)
+- 

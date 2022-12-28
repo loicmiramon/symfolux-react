@@ -1,0 +1,8 @@
+.card-product {
+  margin: 10px;
+  width: 280px;
+  height: 330px;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px #00000060;
+}

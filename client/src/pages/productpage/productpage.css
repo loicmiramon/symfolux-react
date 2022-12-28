@@ -1,0 +1,18 @@
+#productpage-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-product {
+  padding-left: 50px;
+  margin: 30px 0px;
+  font-size: 2.5em;
+}
+
+.container-product {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
