@@ -1,15 +1,15 @@
 import React from 'react'
 import Navigation from '../../components/navigation/Navigation'
 
-const Profile: React.FC = () => {
+const Accountpage: React.FC = () => {
   return (
-    <div id='profilepage'>
+    <div id='accountpage'>
       <Navigation />
-      <main id="profilepage-main">
+      <main id="accountpage-main">
         
       </main>
     </div>
   )
 }
 
-export default Profile
+export default Accountpage

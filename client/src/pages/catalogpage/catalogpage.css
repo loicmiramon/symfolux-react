@@ -1,0 +1,42 @@
+#catalogpage-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-catalog {
+  margin: 30px 0px;
+  font-size: 2.5em;
+  text-decoration: underline;
+  font-family: 'montserrat bold';
+}
+
+.container-catalog {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.undercontainer-catalog {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.undertitle-catalog {
+  padding: 10px;
+  width: 80%;
+  font-size: 1.6em;
+  text-transform: uppercase;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container-card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+

@@ -19,30 +19,68 @@
 
 /* IMPORT PAGES */
 @import url('./pages/homepage/homepage.css');
-@import url('./pages/productpage/productpage.css');
-@import url('./pages/profilepage/profile.css');
+@import url('./pages/catalogpage/catalogpage.css');
+@import url('./pages/accountpage/accountpage.css');
 @import url('./pages/orderpage/order.css');
+@import url('./pages/productpage/productpage.css');
+@import url('./pages/basket/basket.css');
+@import url('./pages/authentificationpage/authentificationpage.css');
+@import url('./pages/registerpage/registerpage.css');
+
 
 /* IMPORT COMPONENTS */
 @import url('./components/navigation/navigation.css');
-@import url('./components/product/card.css');
+@import url('./components/catalog/card/card.css');
+@import url('./components/product/popupImage/popupImage.css');
 
+
+/* IMPORT FONTS */
+
+@font-face {
+  font-family: 'montserrat';
+  src: url('./assets/fonts/Montserrat/Montserrat-Italic-VariableFont_wght.ttf');
+  src: url('./assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Regular.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Italic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Bold.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-BoldItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-ExtraLight.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-ExtraLightItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Light.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-LightItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Medium.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-MediumItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-SemiBold.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-SemiBoldItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-ExtraBold.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-ExtraBoldItalic.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-Black.ttf');
+  src: url('./assets/fonts/Montserrat/static/Montserrat-BlackItalic.ttf');
+}
 
 
 #homepage,
-#productpage,
+#catalogpage,
 #orderpage,
-#profilepage {
-  background-color: var(--color-bgd);
+#accountpage,
+#productpage,
+#basketpage,
+#authentificationpage,
+#registerpage {
+  background-color: var(--color-white);
   display: grid;
 }
 
 #homepage,
-#productpage,
+#catalogpage,
 #orderpage,
-#profilepage {
+#accountpage,
+#productpage,
+#basketpage,
+#authentificationpage,
+#registerpage {
   grid-template-columns: repeat(4, 25%);
-  grid-template-rows: 80px auto;
+  grid-template-rows: 60px auto;
   grid-template-areas: 
   "nav nav nav nav"
   "content content content content"
@@ -50,8 +88,13 @@
 }
 
 #homepage-main,
-#productpage-main,
+#catalogpage-main,
 #orderpage-main,
-#profilepage-main {
+#accountpage-main,
+#productpage-main,
+#basketpage-main,
+#authentificationpage-main,
+#registerpage-main {
   grid-area: content;
+  
 }

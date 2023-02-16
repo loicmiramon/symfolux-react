@@ -11,9 +11,10 @@
   grid-area: nav;
   flex-direction: row;
   height: 100%;
-  background-color: #201b1b; 
-  grid-template-columns: 80px auto 200px;
-  grid-template-rows: 80px;
+  background-color: var(--color-white);
+  box-shadow: 0px 0px 10px #00000060;
+  grid-template-columns: 80px 1fr auto;
+  grid-template-rows: 60px;
   grid-template-areas: 
   "logo . navigation"
   ;
@@ -37,30 +38,73 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  width: 400px;
 }
 
-.link-navigation {
+.link-navigation,
+.btn-logout {
+  text-decoration: none;
+  color: var(--color-black);
+  font-size: 1.4em;
+  width: 150px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  color: var(--color-white);
-  text-transform: uppercase;
-  height: 100%;
-  width: 100%;
-  font-size: 1.4em;
+}
+
+.link-navigation:hover {
+  text-decoration: underline var(--color-black) solid 1.5px;
 }
 
 .link-navigation.active-link {
   text-decoration: underline var(--color-black) solid 1.5px;
-  border-bottom: 1px solid;
-  background-color: wheat;
-  color: var(--color-black);
 }
 
-.link-navigation:hover {
-  background-color: #e6ca97;
-  color: var(--color-black);  
-  text-decoration: underline solid 1.5px;
-  border-bottom: 1px solid;
+.container-subnavigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-white);
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  height: 100%;
 }
+
+.list-subnavigation {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+
+}
+
+.list-subnavigation.active {
+  display: flex;
+}
+
+
+.item-subnavigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: var(--color-white);
+}
+
+.btn-logout {
+
+}
+
+
+
+
+
+
+

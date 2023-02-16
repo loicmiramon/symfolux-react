@@ -1,0 +1,133 @@
+.card-article-product {
+  margin: 10px;
+  width: 350px;
+  height: 400px;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: 1px 2px 3px #00000060;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-img-card-product {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px 4px 0 0;
+}
+
+.card-img-product {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+}
+
+.container-informations-card-product {
+  padding: 15px;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title-product {
+  margin: 3px 0px;
+  font-size: 1.5em;
+  text-decoration: underline;
+  color: var(--color-black);
+  font-weight: 400;
+  font-family: 'montserrat regular';
+}
+
+.card-description-product {
+  font-size: 1.3em;
+  height: 20%;
+  font-family: 'Roboto';
+  display: flex;
+  align-items: center;
+}
+
+.card-price-product {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--color-white);
+  background-color: var(--color-secondary);
+  font-style: italic;
+  width: 30%;
+  height: 30%;
+  text-align: center;
+  box-shadow: 1px 2px 3px #00000060;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.container-btn-card-product {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.undercontainer-btn-card-product {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.btn-card-product {
+  width: 100px;
+  height: 25px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-family: 'montserrat regular';
+  /* animation: btn-card-product .4s ease-in-out; */
+}
+
+.btn-card-product:hover {
+  animation: btn-hover-card-product .4s ease-in-out forwards;
+}
+
+@keyframes btn-card-product {
+  from {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    width: 110px;
+    height: 30px;
+  } to {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    width: 100px;
+    height: 25px;
+  }
+}
+
+@keyframes btn-hover-card-product {
+  from {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    /* width: 100px;
+    height: 25px; */
+  } to {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    /* width: 110px;
+    height: 30px; */
+  }
+}

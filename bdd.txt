@@ -1,90 +1,475 @@
+#####################`PARTIE COMMAND BDD`#####################
 
-#####################`PARTIE USERS`#####################
+CREATE TABLE product (
+  id BIGSERIAL NOT NULL,
+  title VARCHAR(130) NOT NULL,
+  description TEXT NOT NULL,
+  category INT NOT NULL,
+  reference_product TEXT,
+  price NUMERIC NOT NULL,
+  date_created DATETIME NOT NULL,
+  date_updated DATETIME,
+  status BOOLEAN DEFAULT VALUES FALSE,
+  FOREIGN KEY(category) REFERENCES category(id)
+);
 
-- Différents rôles sur la plateforme : Réfléchir à des rôles spécifique d'une entreprise
+CREATE TABLE images (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  src TEXT NOT NULL,
+  alt VARCHAR(70) NOT NULL,
+  title VARCHAR(70) NOT NULL
+)
 
-  - Patron : 
-    - Aura tous les accès à la plateforme et ainsi que les pleins les pleins pouvoirs
-  - Administrateur : 
-    - Aura accès à certaines sections de la plateforme  et à certain pouvoir donné par le Patron
-  - Employé : 
-    - Aura accès à certaines sections de la plateforme
+CREATE TABLE adress_livraison (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  civility
+)
 
-- Les utilisateurs pourrons avoir leur compte désactivé par le patron
+CREATE TABLE category (
+  id SERIAL NOT NULL,
+  category_name VARCHAR(70) NOT NULL
+);
+
+INSERT INTO category (category_name) VALUES 
+('Bracelet'),
+('Montre'),
+('Collier'),
+('Bague')
+;
+
+{
+  "title": "Bague en or blanc",
+  "description": "Bague en or blanc fabriqué par un artisan",
+  "category": 4,
+  "image": "https://www.gemmyo.com/media/image/7d/9b/6dd8be86b921bd729571e541c81c.jpg", 
+  "price": 599.99
+}
+{
+  "title": "Bague en argent",
+  "description": "Bague en argent fabriqué par un artisan",
+  "category": 4,
+  "image": "https://www.i-diamants.com/thmb/carre/512/medias_upload/moxie/bijoux/bague-classique-diamant-or-brillant.jpg", 
+  "price": 899.45
+}
+{
+  "title": "Bague en or",
+  "description": "Bague en or fabriqué par un artisan",
+  "category": 4,
+  "image": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dwf9780679/images/FQDFJZW440-master.jpg?sw=1024&sh=1024", 
+  "price": 189.95
+}
+
+{
+  "title": "Bracelet en argent",
+  "description": "Bracelet en argent fabriqué par un artisan",
+  "category": 1,
+  "image": "https://ocarat.twic.pics/311669/bracelet-argent-maille-miroir-artemis.jpg", 
+  "price": 325.76
+}
+{
+  "title": "Bracelet en diamant",
+  "description": "Bracelet en diamant fabriqué par un artisan",
+  "category": 1,
+  "image": "https://www.gemmyo.com/media/image/4c/5f/0e388fcd54a7c27ce2bc14c79d1f.jpg", 
+  "price": 229.99
+}
+{
+  "title": "Bracelet en or",
+  "description": "Bracelet en or fabriqué par un artisan",
+  "category": 1,
+  "image": "https://fr.arthusbertrand.com/media/catalog/product/cache/a13e371ff89486190d360c321b80a612/b/r/bracelet-jonc-royale-or-jaune-diamant-0.216ct-j9843x0000-2.jpg", 
+  "price": 65.00
+}
+
+{
+  "title": "Collier en argent",
+  "description": "Collier en argent fabriqué par un artisan",
+  "category": 2,
+  "image": "https://photos.maty.com/0652342/V1/800/collier-argent-925-anneaux-entrelaces-45-cm.jpeg", 
+  "price": 45.99
+}
+{
+  "title": "Collier en or",
+  "description": "Collier en or fabriqué par un artisan",
+  "category": 2,
+  "image": "https://www.bijouxbaume.com/upload/image/collier-vintage-en-or-p-image-64479-grande.jpg", 
+  "price": 105.99
+}
+{
+  "title": "Collier en diamant",
+  "description": "Collier en diamant fabriqué par un artisan",
+  "category": 2,
+  "image": "https://ocarat.twic.pics/208190-large_default/collier-diamant-solitaire-isi1-or-blanc-18k-ocarat.jpg", 
+  "price": 245.99
+}
+
+{
+  "title": "Montre en or",
+  "description": "Montre en or fabriqué par un artisan",
+  "category": 3,
+  "image": "https://www.fitness-trackers.fr/wp-content/uploads/2022/01/5eaaa102-10b1-4fa3-aa2e-54371b3b6f94.jpg", 
+  "price": 369.99
+}
+{
+  "title": "Montre en argent",
+  "description": "Montre en argent fabriqué par un artisan",
+  "category": 3,
+  "image": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw47edc631/images/HIMFBQN0MB-master.jpg?sw=268&sh=268", 
+  "price": 489.99
+}
+{
+  "title": "Montre en diamant",
+  "description": "Montre en diamant fabriqué par un artisan",
+  "category": 3,
+  "image": "https://media.cdnws.com/_i/70772/62991/3333/95/montre-homme-retro-et-diamant.png", 
+  "price": 799.99
+}
 
 
-#####################`PARTIE BDD USERS`#####################
+
+########## NEW BDD ##########
+
 
 CREATE TABLE users (
-  id_users BIGSERIAL NOT NULL,
-  lastname VARCHR(100) NOT NULL,
-  firstname VARCHAR(100) NOT NULL,
-  email VARCHAR(150) NOT NULL,
-  password VARCHAR(50) NOT NULL,
-  phone INTEGER NOT NULL,
-  permission VARCHAR(50) NOT NULL,
-  picture VARCHAR(250),
-  account_state BOOLEAN NOT NULL,
-  job VARCHAR(100) NOT NULL
-)
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  email VARCHAR(130) NOT NULL,
+  password VARCHAR(10) NOT NULL,
+  role VARCHAR(50) DEFAULT 'user',
+  lastname VARCHAR(50),
+  firstname VARCHAR(50)
+);
 
-- L'email et le password permet à l'employé de se connecter sur la plateforme. 
-  - Le patron recevra les informations de son compte par email une fois l'abonnement de la plateforme pris.
-  - Le patron devra créer les comptes de ses employés qui pourront modifier le mot de passe VIA leur paramètre du compte
+CREATE TABLE adress_delivery (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  civility VARCHAR(50) NOT NULL,
+  lastname VARCHAR(50) NOT NULL,
+  firstname VARCHAR(50) NOT NULL,
+  adress VARCHAR(250) NOT NULL,
+  additionnal_adress VARCHAR(250) NOT NULL,
+  postal_code INT NOT NULL,
+  city VARCHAR(70) NOT NULL,
+  country VARCHAR(70) NOT NULL,
+  phone INT NOT NULL,
+  email VARCHAR(130) NOT NULL,
+  digicode INT,
+  comment TEXT,
+  user_id INT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
 
-- Le patron pourra Activer/Désactiver le compte de ses employés `colonne : account_state`
-- Divers informations sur l'employé pourra être rempli VIA ses paramètre du comptes
+CREATE TABLE adress_facturation (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  civility VARCHAR(50) NOT NULL,
+  lastname VARCHAR(50) NOT NULL,
+  firstname VARCHAR(50) NOT NULL,
+  adress VARCHAR(250) NOT NULL,
+  additionnal_adress VARCHAR(250) NOT NULL,
+  postal_code INT NOT NULL,
+  city VARCHAR(70) NOT NULL,
+  country VARCHAR(70) NOT NULL,
+  phone INT NOT NULL,
+  email VARCHAR(130) NOT NULL,
+  user_id INT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
 
-- Divers rôle seront sur la platforme, le patron pourra les changer selon son organisation (partie encore à réfléchir selon ce qu'il y aura sur la plateforme)
+CREATE TABLE products (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(250) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  reduction DECIMAL(10,2),
+  description TEXT NOT NULL,
+  category_id INT NOT NULL,
+  activation BOOLEAN DEFAULT 'false',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  slug VARCHAR(120),
+  FOREIGN KEY(category_id) REFERENCES categories(id)
+);
 
-#####################`PARTIE DOCUMENTS`#####################
+CREATE TABLE categories (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(250) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-- Possibilité de stocker les documents de différent type :
-  - Devis
-  - Facture
-  - Paie
-  - Contrat :
-    - Les contrats seront accessible uniquement par le Patron (ainsi qu'à l'employé concerné)
-- Possibilité d'enregistrer / imprimer les documents
-- Possibilité de donner accès à des documents ou non à certain rôle de la plateforme lors de l'enregistrement du document
-- Les employés auront accès uniquement à leurs documents ainsi que ceux dont ils ont été ajouté en collaborateur
+CREATE TABLE images (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  src VARCHAR(250) NOT NULL,
+  alt VARCHAR(250) NOT NULL,
+  title VARCHAR(250) NOT NULL,
+  product_id INT NOT NULL,
+  FOREIGN KEY(product_id) REFERENCES products(id)
+);
+
+CREATE TABLE sizes (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(250) NOT NULL,
+  category_id INT NOT NULL,
+  FOREIGN KEY(category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE materials (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(250) NOT NULL
+);
+
+CREATE TABLE product_matiere (
+  product_id INT NOT NULL,
+  material_id INT NOT NULL,
+  FOREIGN KEY(product_id) REFERENCES products(id),
+  FOREIGN KEY(material_id) REFERENCES materials(id)
+);
+
+CREATE TABLE stock (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  quantity INT NOT NULL,
+  size_id INT NOT NULL,
+  product_id INT NOT NULL,
+  FOREIGN KEY(size_id) REFERENCES sizes(id),
+  FOREIGN KEY(product_id) REFERENCES products(id)
+);
+
+CREATE TABLE ordered (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  user_id INT NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  livraison_id INT NOT NULL,
+  facturation_id INT NOT NULL,
+  FOREIGN KEY(user_id) REFERENCES users(id),
+  FOREIGN KEY(livraison_id) REFERENCES adress_delivery(id),
+  FOREIGN KEY(facturation_id) REFERENCES adress_facturation(id)
+);
+
+CREATE TABLE details_ordered (
+  id BIGSERIAL PRIMARY KEY NOT NULL,
+  quantity INT NOT NULL,
+  ordered_id INT NOT NULL,
+  product_id INT NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY(product_id) REFERENCES products(id),
+  FOREIGN KEY(ordered_id) REFERENCES ordered(id)
+);
 
 
 
-#####################`PARTIE BDD DOCUMENTS`#####################
-
-CREATE TABLE documents (
-  id_docs BIGSERIAL NOT NULL,
-  dates DATE NOT NULL,
-  id_user INTEGER NOT NULL,
-  business_customer VARCHAR(50) NOT NULL,
-  documents VARCHAR(250) NOT NULL,
-  category_doc INTEGER NOT NULL
-)
 
 
-- Cette partie conçerne le stockage des documents de l'entreprise
-  - Chaque document aura une catégorie (Devis, Facture, Contrat)
-  - Chaque document contiendra des informations : 
-    - Qui l'a posté (id_user)
-    - la date à laquelle il a été posté (dates)
-    - qu'elle entreprise elle concerne (business_customer)
-    - Le document enregistré et relier à la TABLE `category_document` (documents)
-    - La catégorie du document (category_doc) !!La catégorie sera une table à part donc une liaison à faire!!
+########## INSERT BDD ##########
+
+// Module USER
+
+INSERT INTO users (email, password, role, lastname, firstname) VALUES ('loic.miramon78@gmail.com', 'loic123456', 'admin', 'Miramon', 'Loïc');
+
+// Module Produit
+
+INSERT INTO categories (name) VALUES ('Bague'), ('Collier'), ('Montre'), ('Bracelet'), ('Boucle d\'oreille');
 
 
-#####################`PARTIE CATEGORIE`#####################
+INSERT INTO sizes (name, category_id) VALUES ('Taille 50', 1), ('Taille 52', 1), ('Taille 54', 1), ('Taille 56', 1), ('Taille 58', 1), ('Taille 60', 1), ('Taille 62', 1), ('Taille 64', 1), ('Taille 66', 1), ('Taille 68', 1), ('Taille 70', 1), ('Taille 72', 1), ('Taille 74', 1), ('Taille 76', 1), ('Taille 78', 1), ('Taille 80', 1), ('Taille 82', 1), ('Taille 84', 1), ('Taille 86', 1), ('Taille 88', 1), ('Taille 90', 1), ('Taille 92', 1), ('Taille 94', 1), ('Taille 96', 1), ('Taille 98', 1), ('Taille 100', 1), ('Taille 102', 1), ('Taille 104', 1), ('Taille 106', 1), ('Taille 108', 1), ('Taille 110', 1), ('Taille 112', 1), ('Taille 114', 1), ('Taille 116', 1), ('Taille 118', 1), ('Taille 120', 1), ('Taille 122', 1), ('Taille 124', 1), ('Taille 126', 1), ('Taille 128', 1), ('Taille 130', 1), ('Taille 132', 1), ('Taille 134', 1), ('Taille 136', 1), ('Taille 138', 1), ('Taille 140', 1), ('Taille 142', 1), ('Taille 144', 1), ('Taille 146', 1), ('Taille 148', 1), ('Taille 150', 1), ('Taille 152', 1), ('Taille 154', 1), ('Taille 156', 1), ('Taille 158', 1);
 
-CREATE TABLE category_document (
-  id_category BIGSERIAL NOT NULL,
-  category_name VARCHAR(50) NOT NULL,
-)
+INSERT INTO materials (name) VALUES ('Diamant'), ('Or'), ('Argent');
+
+INSERT INTO products (title, price, reduction, description, category_id, activation, slug, images) VALUES 
+('Bague en diamant', 299.99, 0, 'Bague en diamant fabriqué par un artisan', 4, true, 'bague-en-diamant', 'https://www.gemmyo.com/media/image/c6/f4/59989ba0412db0e9aec7e59cd2e7.jpg'), 
+('Bague en Or', 189.99, 0, 'Bague en Or fabriqué par un artisan', 4, true, 'bague-en-or', 'https://www.gemmyo.com/media/image/ab/8c/0cd48bf301db420b51d9395d0eff.jpg'), 
+('Bague en Argent', 99.99, 0, 'Bague en Argent fabriqué par un artisan', 4, true, 'bague-en-argent', 'https://www.ubbijoux.com/28315-large_default/bague-argent-et-oxydes-de-zirconium-phebus-and-co.jpg'),
+
+('Collier en diamant', 399.99, 0, 'Collier en diamant fabriqué par un artisan', 1, true, 'collier-en-diamant','https://messika.cdn-tech.io/media/catalog/product/cache/f68e9136285bb96b85e5514f4abecbaf/c/o/collier-diamant-or-blanc-joy-poire-040ct-06867-bis_1.jpg'), 
+('Collier en Or', 289.99, 0, 'Collier en Or fabriqué par un artisan', 1, true, 'collier-en-or', 'https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw85fa6cd5/images/B3CFJZW134-master.jpg?sw=268&sh=268'), 
+('Collier en Argent', 199.99, 0, 'Collier en Argent fabriqué par un artisan', 1, true, 'collier-en-argent', 'https://www.juliendorcel.com/5981-large_default/collier-argent-et-diamant.jpg'),
 
 
-#####################`PARTIE CALENDAR`#####################
 
-- Chaque rôle pourra se servir du calendrier
-- Chaque membres aura accès uniquement à ses rendez-vous et à ceux auquelles ils sont en collaboration
-- Le patron 
-- Possibilité d'ajouter / modifier / supprimer un rendez vous (uniquement par le dépositaire ou le Patron)
-- 
+('Bracelet en or', 399.99, 0, 'Bracelet en or fabriqué par un artisan', 2, true, 'bracelet-en-or', 'https://cdn1.lemanegeabijoux.com/33639/bracelet-en-or-jaune-maille-torsadee.jpg'), 
+('Bracelet en argent', 299.99, 0, 'Bracelet en argent fabriqué par un artisan', 2, true, 'bracelet-en-argent', 'https://www.jollia.fr/media/catalog/product/cache/8db0cb17cef502171021230692a6c24f/b/r/bracelet-jonc-argent-2.jpg'),
+('Bracelet en diamant', 599.99, 0, 'Bracelet en diamant fabriqué par un artisan', 2, true, 'bracelet-en-diamant', 'https://www.luckyonebijoux.com/wp-contdog/uploads/2020/09/bracelet-diamant-or-blanc-18-carats-lucky-one-joaillerie.png'), 
+
+('Boucle d'oreille en diamant', 699.99, 0, 'Boucle d'oreille en diamant fabriqué par un artisan', 6, true, 'boucle-d-oreille-en-diamant', 'https://media.debeers.com/i/debeers/E102115_01?$small_Desktop$'),
+('Boucle d'oreille en or', 599.99, 0, 'Boucle d'oreille en or fabriqué par un artisan', 6, true, 'boucle-d-oreille-en-or', 'https://cdn2.lemanegeabijoux.com/22243-thickbox_default/boucles-d-oreilles-en-or-jaune-oxyde-de-zirconium-moyen-modele.jpg?82841d873e92f104a4d33c0e795262a6'),
+('Boucle d'oreille en argent', 499.99, 0, 'Boucle d'oreille en argent fabriqué par un artisan', 6, true, 'boucle-d-oreille-en-argent', 'https://www.juliendorcel.com/1773-large_default/boucles-d-oreilles-argent-et-oxyde.jpg');
+
+('Montre en diamant', 489.99, 0, 'Montre en diamant fabriqué par un artisan', 3, true, 'montre-en-diamant', 'https://www.cdiscount.com/pdt2/8/9/0/1/700x700/sha9138826606890/rw/sharphy-argent-montre-homme-luxe-de-marque-2020-di.jpg'), 
+('Montre en or', 379.99, 0, 'Montre en or fabriqué par un artisan', 3, true, 'montre-en-or', 'https://www.fitness-trackers.fr/wp-content/uploads/2022/01/5eaaa102-10b1-4fa3-aa2e-54371b3b6f94.jpg'), 
+('Montre en argent', 269.99, 0, 'Montre en argent fabriqué par un artisan', 3, true, 'montre-en-argent', 'https://www.3suisses.fr/media/produits/festina/img/montre-festina-f16744-3-montre-argent-bleue-acier-femme_66777-2_1140x1140.jpg'),
+
+
+{
+  "title": ,
+  "price": ,
+  "reduction": ,
+  "description": ,
+  "category_id": ,
+  "activation": ,
+  "slug": 
+}
+
+{
+  "title": "Bague en diamant",
+  "price": 299.99,
+  "reduction": 0,
+  "description": "Bague en diamant fabriqué par un artisan",
+  "category_id": 4,
+  "activation": true,
+  "slug": "bague-en-diamant",
+  "images": "https://www.gemmyo.com/media/image/c6/f4/59989ba0412db0e9aec7e59cd2e7.jpg"
+}
+
+{
+  "title": "Bague en Or",
+  "price": 189.99,
+  "reduction": 0,
+  "description": "Bague en Or fabriqué par un artisan",
+  "category_id": 4,
+  "activation": true,
+  "slug": "bague-en-or",
+  "images": "https://www.gemmyo.com/media/image/ab/8c/0cd48bf301db420b51d9395d0eff.jpg"
+}
+
+{
+  "title": "Bague en Argent",
+  "price": 99.99,
+  "reduction": 0,
+  "description": "Bague en Argent fabriqué par un artisan",
+  "category_id": 4,
+  "activation": true,
+  "slug": "bague-en-argent",
+  "images": "https://www.ubbijoux.com/28315-large_default/bague-argent-et-oxydes-de-zirconium-phebus-and-co.jpg"
+}
+
+{
+  "title": "Collier en diamant",
+  "price": 399.99,
+  "reduction": 0,
+  "description": "Collier en diamant fabriqué par un artisan",
+  "category_id": 1,
+  "activation": true,
+  "slug": "collier-en-diamant",
+  "images": "https://messika.cdn-tech.io/media/catalog/product/cache/f68e9136285bb96b85e5514f4abecbaf/c/o/collier-diamant-or-blanc-joy-poire-040ct-06867-bis_1.jpg"
+}
+
+{
+  "title": "Collier en Or",
+  "price": 289.99,
+  "reduction": 0,
+  "description": "Collier en Or fabriqué par un artisan",
+  "category_id": 1,
+  "activation": true,
+  "slug": "collier-en-or",
+  "images": "https://www.histoiredor.com/dw/image/v2/BCQS_PRD/on/demandware.static/-/Sites-THOM_CATALOG/default/dw85fa6cd5/images/B3CFJZW134-master.jpg?sw=268&sh=268"
+}
+
+{
+  "title": "Collier en Argent",
+  "price": 199.99,
+  "reduction": 0,
+  "description": "Collier en Argent fabriqué par un artisan",
+  "category_id": 1,
+  "activation": true,
+  "slug": "collier-en-argent",
+  "images": "https://www.juliendorcel.com/5981-large_default/collier-argent-et-diamant.jpg"
+}
+
+{
+  "title": "Bracelet en or",
+  "price": 399.99,
+  "reduction": 0,
+  "description": "Bracelet en or fabriqué par un artisan",
+  "category_id": 2,
+  "activation": true,
+  "slug": "bracelet-en-or",
+  "images": "https://cdn1.lemanegeabijoux.com/33639/bracelet-en-or-jaune-maille-torsadee.jpg"
+}
+
+{
+  "title": "Bracelet en argent",
+  "price": 299.99,
+  "reduction": 0,
+  "description": "Bracelet en argent fabriqué par un artisan",
+  "category_id": 2,
+  "activation": true,
+  "slug":  "bracelet-en-argent",
+  "images": "https://www.jollia.fr/media/catalog/product/cache/8db0cb17cef502171021230692a6c24f/b/r/bracelet-jonc-argent-2.jpg"
+}
+
+{
+  "title": "Bracelet en diamant",
+  "price": 599.99,
+  "reduction": 0,
+  "description": "Bracelet en diamant fabriqué par un artisan",
+  "category_id": 2,
+  "activation": true,
+  "slug": "bracelet-en-diamant",
+  "images": "https://www.luckyonebijoux.com/wp-contdog/uploads/2020/09/bracelet-diamant-or-blanc-18-carats-lucky-one-joaillerie.png"
+}
+
+{
+  "title": "Boucle d'oreille en diamant",
+  "price": 699.99,
+  "reduction": 0,
+  "description": "Boucle d'oreille en diamant fabriqué par un artisan",
+  "category_id": 6,
+  "activation": true,
+  "slug": "boucle-d-oreille-en-diamant",
+  "images": "https://media.debeers.com/i/debeers/E102115_01?$small_Desktop$"
+}
+
+{
+  "title": "Boucle d'oreille en or",
+  "price": 599.99,
+  "reduction": 0,
+  "description": "Boucle d'oreille en or fabriqué par un artisan",
+  "category_id": 6,
+  "activation": true,
+  "slug": "boucle-d-oreille-en-or",
+  "images": "https://cdn2.lemanegeabijoux.com/22243-thickbox_default/boucles-d-oreilles-en-or-jaune-oxyde-de-zirconium-moyen-modele.jpg?82841d873e92f104a4d33c0e795262a6"
+}
+
+{
+  "title": "Boucle d'oreille en argent",
+  "price": 499.99,
+  "reduction": 0,
+  "description": "Boucle d'oreille en argent fabriqué par un artisan",
+  "category_id": 6,
+  "activation": true,
+  "slug": "boucle-d-oreille-en-argent",
+  "images": "https://www.juliendorcel.com/1773-large_default/boucles-d-oreilles-argent-et-oxyde.jpg"
+}
+
+{
+  "title": "Montre en diamant",
+  "price": 579.99,
+  "reduction": 0,
+  "description": "Montre en diamant fabriqué par un artisan",
+  "category_id": 3,
+  "activation": true,
+  "slug": "montre-en-diamant",
+  "images": "https://www.cdiscount.com/pdt2/8/9/0/1/700x700/sha9138826606890/rw/sharphy-argent-montre-homme-luxe-de-marque-2020-di.jpg"
+}
+
+{
+  "title": "Montre en or",
+  "price": 379.99,
+  "reduction": 0,
+  "description": "Montre en or fabriqué par un artisan",
+  "category_id": 3,
+  "activation": true,
+  "slug": "montre-en-or",
+  "images": "https://www.fitness-trackers.fr/wp-content/uploads/2022/01/5eaaa102-10b1-4fa3-aa2e-54371b3b6f94.jpg"
+}
+
+{
+  "title": "Montre en argent",
+  "price": 279.99,
+  "reduction": 0,
+  "description": "Montre en argent fabriqué par un artisan",
+  "category_id": 3,
+  "activation": true,
+  "slug": "montre-en-argent",
+  "images": "https://www.3suisses.fr/media/produits/festina/img/montre-festina-f16744-3-montre-argent-bleue-acier-femme_66777-2_1140x1140.jpg"
+}
+
+
+

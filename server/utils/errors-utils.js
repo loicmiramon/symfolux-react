@@ -27,6 +27,8 @@ module.exports.authRegisterErrors = (err) => {
   if (err.message.includes('password')) {
     errors.lastname = "Ce champ est requis"
   }
+
+  return errors
 }
 
 module.exports.authSignInErrors = (err) => {
@@ -34,6 +36,16 @@ module.exports.authSignInErrors = (err) => {
     email : "",
     password: ""
   }
+
+  if (err.includes('email')) {
+    errors.email = "Email incorrect"
+  }
+
+  if (err.includes('password')) {
+    errors.password = "Mot de passe incorrect"
+  }
+
+  return errors
 }
 
 // Product Errors
