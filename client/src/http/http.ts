@@ -1,24 +1,25 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `http://localhost:5000`,
   headers: {
     'Content-Type': 'application/json',
     'autorization': null,
-    'refreshToken': null
+    'refreshtoken': null
   },
 });
 
 instance.interceptors.request.use(
   config => {
     const token = localStorage.getItem('token')
-    const refreshToken = localStorage.getItem('refreshToken')
+    const refresh = localStorage.getItem('refreshtoken')
+
     if (token) {
       config.headers.authorization = `Bearer ${token}`
     } 
 
-    if (refreshToken) {
-      config.headers.refreshToken = `Bearer ${refreshToken}`
+    if (refresh) {
+      config.headers.refreshtoken = `Bearer ${refresh}`
     }
 
     return config

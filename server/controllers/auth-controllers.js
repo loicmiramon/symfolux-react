@@ -124,16 +124,16 @@ module.exports.postAuthSignIn = async (req, res) => {
 
 // Authentification Refresh Token Function
 module.exports.getAuthRefreshToken = async (req, res) => {
-  const result = await db.query('SELECT token FROM refresh_token WHERE user_id = $1', [req.user_id])
-  try {
-    if (result.rows[0]) {
-      res.status(200).send({
-        token: result.rows[0].token
-      })
-    }
-  } catch (error) {
-    res.status(500).send('GET Authentification Refresh Token :', error)
-  }
+  // const result = await db.query('SELECT token FROM refresh_token WHERE user_id = $1', [req.user_id])
+  // try {
+  //   if (result.rows[0]) {
+  //     res.status(200).send({
+  //       token: result.rows[0].token
+  //     })
+  //   }
+  // } catch (error) {
+  //   res.status(500).send('GET Authentification Refresh Token :', error)
+  // }
 }
 
 // Authentification Get Function

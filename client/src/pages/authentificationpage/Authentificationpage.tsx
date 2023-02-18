@@ -12,25 +12,32 @@ const Authentificationpage: React.FC = () => {
   const { register, handleSubmit, reset } = useForm<loginInterface>()
   const navigate = useNavigate();
 
-
   const handleAuth: SubmitHandler<loginInterface>  = (data: loginInterface) => {
 
     instance.post('/api/auth/login', {
       email: data.email,
       password: data.password
     }).then(res => {
+
       if(localStorage.getItem('token')) {
         localStorage.removeItem('token')
       }
       localStorage.setItem('token', res.data.token)
-      instance.get('/api/auth/refresh-token').then(res => {
-        if(localStorage.getItem('refreshToken')) {
-          localStorage.removeItem('refreshToken')
-        }
-        localStorage.setItem('refreshToken', res.data.refreshToken)
-      }).catch(err => {
-        console.log(err)
-      })
+    
+      if(localStorage.getItem('refreshtoken')) {
+        localStorage.removeItem('refreshtoken')
+      }
+      localStorage.setItem('refreshtoken', res.data.refreshToken)
+
+      // instance.get('/api/auth/refresh-token').then(res => {
+      //   if(localStorage.getItem('refreshToken')) {
+      //     localStorage.removeItem('refreshToken')
+      //   }
+      //   console.log(res.data.refreshToken)
+      //   localStorage.setItem('refreshToken', res.data.refreshToken)
+      // }).catch(err => {
+      //   console.log(err)
+      // })
       notify("Vous êtes connecté, redirection en cours...", "success")
       reset()
       setTimeout(() => {

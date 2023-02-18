@@ -14,6 +14,16 @@ const corsOptions = {
 
 
 // Middleware
+app.use((req, res, next) => {
+  // Autoriser les requêtes depuis toutes les origines
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Autoriser les en-têtes spécifiques
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, refreshToken');
+  // Autoriser les méthodes HTTP spécifiques
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  next();
+});
+
 app.use(express.json())
 app.use('/', routing)
 app.use(cookieParser())

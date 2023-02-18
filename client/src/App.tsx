@@ -8,16 +8,10 @@ import Productpage from './pages/productpage/Productpage'
 import Basketpage from './pages/basket/Basketpage'
 import Authentificationpage from './pages/authentificationpage/Authentificationpage'
 import Registerpage from './pages/registerpage/Registerpage'
-import { UserProvider } from './context/UserContext'
 
 function App() {
 
   return (
-    <UserProvider isAuthenticated={false} user={undefined} login={function (email: string, password: string): Promise<void> {
-      throw new Error('Function not implemented.')
-    } } logout={function (): void {
-      throw new Error('Function not implemented.')
-    } }>
       <div className="App">
         <Routes>
           <Route path='/' element={<Homepage />} />
@@ -30,7 +24,6 @@ function App() {
           <Route path="/register" element={<Registerpage />} />
         </Routes>
       </div>
-    </UserProvider>
   );
 }
 

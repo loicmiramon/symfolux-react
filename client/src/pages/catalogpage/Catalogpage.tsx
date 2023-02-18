@@ -3,14 +3,16 @@ import Navigation from "../../components/navigation/Navigation"
 import Card from "../../components/catalog/card/Card"
 import { categoryInterface, imageInterface, productInterface } from '../../types/interface/index'
 import instance from '../../http/http';
-import axios from 'axios';
-import { useUser } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Catalogpage: React.FC = () => {
   
   const [products, setProducts] = useState<productInterface[]>()
   const [category, setCategory] = useState<categoryInterface[]>()
   const [images, setImages] = useState<imageInterface[]>()
+  const [user, setUser] = useState<boolean>(false)
+
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -28,13 +30,16 @@ const Catalogpage: React.FC = () => {
   useEffect(() => {
     instance.get('/api/auth/me').then(res => {
       if(res.data) {
-        console.log('Catalog : USER CONNECTED')
+        setUser(true)
+        console.log('Vous êtes connecté')
       } else {
-        console.log("Vous n'êtes pas connecté")
+        setUser(false)
+        console.log('Vous n\'êtes pas connecté')
       }
     }).catch(err => {
       if (err.response && err.response.status === 401) {
         console.log("Vous n'êtes pas connecté")
+        navigate('/authentification')
       } else {
         console.log("Erreur lors de la récupération de l'utilisateur connecté : ", err)
       }
@@ -45,7 +50,7 @@ const Catalogpage: React.FC = () => {
     <div id="catalogpage">
       <Navigation />
       <main id="catalogpage-main">
-        <h1 className="title-catalog">Nos Produits</h1>
+        <h1 className="title-catalog">Nos Produits {user ? "Connecté" : "Non connecté" }</h1>
 
         <div className="container-catalog">
           {
