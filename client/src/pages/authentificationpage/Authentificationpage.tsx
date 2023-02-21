@@ -1,51 +1,55 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Navigation from '../../components/navigation/Navigation'
 import { loginInterface } from '../../types/interface/index'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import Toast, { notify } from '../../components/toast/Toast'
 import instance from '../../http/http'
+import { AuthContext } from '../../context/UserContext'
 
 
 const Authentificationpage: React.FC = () => {
 
   const { register, handleSubmit, reset } = useForm<loginInterface>()
   const navigate = useNavigate();
+  const { loginUser } = useContext(AuthContext)
 
   const handleAuth: SubmitHandler<loginInterface>  = (data: loginInterface) => {
 
-    instance.post('/api/auth/login', {
-      email: data.email,
-      password: data.password
-    }).then(res => {
+    loginUser(data.email, data.password)
 
-      if(localStorage.getItem('token')) {
-        localStorage.removeItem('token')
-      }
-      localStorage.setItem('token', res.data.token)
+    // instance.post('/api/auth/login', {
+    //   email: data.email,
+    //   password: data.password
+    // }).then(res => {
+
+    //   if(localStorage.getItem('token')) {
+    //     localStorage.removeItem('token')
+    //   }
+    //   localStorage.setItem('token', res.data.token)
     
-      if(localStorage.getItem('refreshtoken')) {
-        localStorage.removeItem('refreshtoken')
-      }
-      localStorage.setItem('refreshtoken', res.data.refreshToken)
+    //   if(localStorage.getItem('refreshtoken')) {
+    //     localStorage.removeItem('refreshtoken')
+    //   }
+    //   localStorage.setItem('refreshtoken', res.data.refreshToken)
 
-      // instance.get('/api/auth/refresh-token').then(res => {
-      //   if(localStorage.getItem('refreshToken')) {
-      //     localStorage.removeItem('refreshToken')
-      //   }
-      //   console.log(res.data.refreshToken)
-      //   localStorage.setItem('refreshToken', res.data.refreshToken)
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-      notify("Vous êtes connecté, redirection en cours...", "success")
-      reset()
-      setTimeout(() => {
-        navigate('/catalog')
-      }, 3500)
-    }).catch(err => {
-      notify("Mot de passe ou email incorrect, veuillez réessayer", "error")
-    })
+    //   // instance.get('/api/auth/refresh-token').then(res => {
+    //   //   if(localStorage.getItem('refreshToken')) {
+    //   //     localStorage.removeItem('refreshToken')
+    //   //   }
+    //   //   console.log(res.data.refreshToken)
+    //   //   localStorage.setItem('refreshToken', res.data.refreshToken)
+    //   // }).catch(err => {
+    //   //   console.log(err)
+    //   // })
+    //   notify("Vous êtes connecté, redirection en cours...", "success")
+    //   reset()
+    //   setTimeout(() => {
+    //     navigate('/catalog')
+    //   }, 3500)
+    // }).catch(err => {
+    //   notify("Mot de passe ou email incorrect, veuillez réessayer", "error")
+    // })
   }
 
   return (

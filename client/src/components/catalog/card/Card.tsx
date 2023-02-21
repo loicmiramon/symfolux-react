@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../../context/UserContext'
 import { imageInterface, productInterface } from '../../../types/interface'
 
 const Card: React.FC<productInterface> = (props: productInterface) => {
   const { id, title, price,  description, slug, images } = props as productInterface
   const navigate = useNavigate()
+  const { isUserConnected } = useContext(AuthContext)
 
 
   const handleClickNavigate = (slug: string) => {
@@ -24,7 +26,11 @@ const Card: React.FC<productInterface> = (props: productInterface) => {
         <div className="container-btn-card-product">
           <p className="card-price-product"> {price} €</p>
           <div className="undercontainer-btn-card-product">
-            <button className='btn-card-product' >Ajouter au panier</button>
+            {
+              isUserConnected ?
+              <button className='btn-card-product' >Ajouter au panier</button> :
+              null
+            }
             <button onClick={() => handleClickNavigate(slug)} className='btn-card-product' >Voir produit</button>
           </div>
         </div>

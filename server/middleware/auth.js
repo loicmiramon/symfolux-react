@@ -40,12 +40,12 @@ module.exports.authenticateTokenMiddleware = (req, res, next) => {
       if (refresh == null) return res.status(401).send('refreshToken not found')
       jwt.verify(refresh, process.env.TOKEN_REFRESH, (err, user) => {
         if (err) return res.status(403).send('refreshToken expired')
-        req.user = user.id.id
+        req.user = user.id
         return next()
       })
       return
     }
-    req.user = user.id.id
+    req.user = user.id
   })
 }
 

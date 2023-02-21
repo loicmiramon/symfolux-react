@@ -1,6 +1,6 @@
 .card-article-product {
-  margin: 10px;
-  width: 350px;
+  margin-top: 10px;
+  width: 400px;
   height: 400px;
   background-color: var(--color-white);
   border-radius: 4px;
@@ -10,6 +10,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 
 .container-img-card-product {
   width: 100%;
@@ -56,12 +57,11 @@
 .card-price-product {
   font-size: 1.5em;
   font-weight: 600;
-  color: var(--color-white);
-  background-color: var(--color-secondary);
+  color: var(--color-secondary);
+  background-color: var(--color-white);
   font-style: italic;
   width: 30%;
   height: 30%;
-  text-align: center;
   box-shadow: 1px 2px 3px #00000060;
   display: flex;
   justify-content: center;

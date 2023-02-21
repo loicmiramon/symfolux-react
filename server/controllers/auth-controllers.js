@@ -152,13 +152,14 @@ module.exports.getAuth = async (req, res) => {
 
 // Authentification Logout Function
 module.exports.postAuthLogout = (req, res) => {
-  const result = db.query('DELETE FROM refresh_token WHERE user_id = $1', [req.user.id])
-  if(!localStorage.getItem('token')) return res.status(401).send('No token')
-  if(!localStorage.getItem('refreshToken')) return res.status(401).send('No refreshToken')
-  localStorage.removeItem('token')
-  localStorage.removeItem('refreshToken')
+  if(req.headers.authorization) {
+    delete req.headers.authorization
+  }
 
-  res.status(200).send({result})
+  if(req.headers.refreshtoken) {
+    delete req.headers.refreshtoken
+  }
+  res.status(200).send()
 }
 
 // Authentification Update Function

@@ -47,7 +47,7 @@ router.delete('/api/product/delete/:id', delProduct)
 // Authentification
 router.post('/api/auth/register', postAuthSignUp)
 router.post('/api/auth/login', postAuthSignIn)
-router.post('/api/auth/logout', logoutMiddleware,postAuthLogout)
+router.post('/api/auth/logout', postAuthLogout)
 router.post('/api/auth/delivery', postAdressDelivery)
 router.post('/api/auth/facturation', postAdressFacturation)
 router.get('/api/auth/refresh-token', getAuthRefreshToken)

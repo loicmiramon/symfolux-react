@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Homepage from './pages/homepage/Homepage'
 import Order from './pages/orderpage/Order'
@@ -8,10 +8,14 @@ import Productpage from './pages/productpage/Productpage'
 import Basketpage from './pages/basket/Basketpage'
 import Authentificationpage from './pages/authentificationpage/Authentificationpage'
 import Registerpage from './pages/registerpage/Registerpage'
+import { AuthProvider } from './context/UserContext'
 
 function App() {
 
+  
+
   return (
+    <AuthProvider>
       <div className="App">
         <Routes>
           <Route path='/' element={<Homepage />} />
@@ -24,7 +28,10 @@ function App() {
           <Route path="/register" element={<Registerpage />} />
         </Routes>
       </div>
+    </AuthProvider>
   );
 }
 
 export default App;
+
+
