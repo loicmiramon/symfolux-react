@@ -26,14 +26,6 @@
   flex-direction: column;
 }
 
-.undertitle-catalog {
-  padding: 10px;
-  width: 80%;
-  font-size: 1.6em;
-  text-transform: uppercase;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
 .container-card {
   width: 100%;
   display: flex;

@@ -37,6 +37,7 @@ export interface registerInterface {
   password: string;
 }
 
+
 // Interface Login (component Authentificationpage)
 export interface loginInterface {
   email: string;
@@ -50,6 +51,7 @@ export interface AuthContextData {
   user: User | null;
   loginUser: (email: string, password: string) => void;
   detectUser: () => void;
+  registerUser: (email: string, password: string, lastname: string, firstname: string) => void;
   logout : () => void;
 }
 

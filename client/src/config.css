@@ -32,6 +32,8 @@
 @import url('./components/navigation/navigation.css');
 @import url('./components/catalog/card/card.css');
 @import url('./components/product/popupImage/popupImage.css');
+@import url('./components/form/input.css');
+@import url('./components/navigation/item/item.css');
 
 
 /* IMPORT FONTS */

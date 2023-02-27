@@ -2,16 +2,15 @@ import React, {useContext} from 'react'
 import Navigation from '../../components/navigation/Navigation'
 import { loginInterface } from '../../types/interface/index'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
-import Toast, { notify } from '../../components/toast/Toast'
-import instance from '../../http/http'
+import { Link } from 'react-router-dom'
+import Toast from '../../components/toast/Toast'
 import { AuthContext } from '../../context/UserContext'
+import Input from '../../components/form/InputForm'
 
 
 const Authentificationpage: React.FC = () => {
 
   const { register, handleSubmit, reset } = useForm<loginInterface>()
-  const navigate = useNavigate();
   const { loginUser } = useContext(AuthContext)
 
   const handleAuth: SubmitHandler<loginInterface>  = (data: loginInterface) => {
@@ -60,12 +59,20 @@ const Authentificationpage: React.FC = () => {
         <form action="" className="form-authentification" onSubmit={handleSubmit(handleAuth)}>
           <Toast 
           />
-          <div className="form-group-authentification">
-            <input {...register('email')} type="email" name="email" id="email" placeholder='Email' required/>
-          </div>
-          <div className="form-group-authentification">
-            <input {...register('password')} type="password" name="password" id="password" placeholder='Mot de passe' required/>
-          </div>
+          <Input 
+          name='email'
+          type='email'
+          placeholder='Email'
+          register={register("email")}
+          id='email'
+          />
+          <Input 
+          name='password'
+          type='password'
+          placeholder='Password'
+          register={register("password")}
+          id='password'
+          />
           <button type="submit" className="btn-authentification">Se connecter</button>
           <div className="container-infos-auth">
             <p className='text-auth'>Pas encore inscrit ?</p><Link to='/register' className='link-auth'>S'inscrire</Link>

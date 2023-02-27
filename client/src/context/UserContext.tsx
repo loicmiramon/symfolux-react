@@ -1,8 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../components/toast/Toast'
 import instance from '../http/http'
-import { AuthContextData, User } from '../types/interface';
+import { AuthContextData, registerInterface, User } from '../types/interface';
 
 interface props {
   children?: React.ReactNode;
@@ -14,8 +15,26 @@ const AuthProvider: React.FC<props> = ({ children }) => {
   const navigate = useNavigate();
   const [isUserConnected, setIsUserConnected] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const { reset } = useForm();
 
 
+  const registerUser = (email: string, password: string, lastname: string, firstname: string) => {
+      instance.post('api/auth/register', {
+        email,
+        password,
+        role: 'user',
+        lastname,
+        firstname,
+      }).then(res => {
+        reset();
+        notify("Vous êtes inscrit, redirection en cours...", "success")
+        setTimeout(() => {
+          navigate('/authentification');
+        }, 3500)
+      }).catch(err => {
+        notify("Une erreur est survenue, vérifiez vos informations", "error")
+      })
+  }
 
   const loginUser = (email: string, password: string) => {
     instance.post('/api/auth/login', {
@@ -31,6 +50,7 @@ const AuthProvider: React.FC<props> = ({ children }) => {
           localStorage.removeItem('refreshtoken');
         }
         localStorage.setItem('refreshtoken', res.data.refreshToken);
+        reset();
         notify('Vous êtes connecté, redirection en cours...', 'success');
         setTimeout(() => {
           navigate('/catalog');
@@ -42,7 +62,6 @@ const AuthProvider: React.FC<props> = ({ children }) => {
   };
 
   const detectUser = () => {
-    console.log('detectUser')
     instance.get('/api/auth/me').then((res) => {
       console.log('res', res)
         if (res.data) {
@@ -80,7 +99,7 @@ const AuthProvider: React.FC<props> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isUserConnected, loginUser, detectUser, user, logout }}>
+    <AuthContext.Provider value={{ isUserConnected, registerUser,loginUser, detectUser, user, logout }}>
       {children}
     </AuthContext.Provider>
   );

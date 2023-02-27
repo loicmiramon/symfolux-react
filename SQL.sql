@@ -122,3 +122,28 @@ CREATE TABLE details_ordered (
   FOREIGN KEY(product_id) REFERENCES products(id),
   FOREIGN KEY(ordered_id) REFERENCES ordered(id)
 );
+
+
+-- Bijouterie
+insert into products (title, price, reduction, description, category_id, activation, slug) values 
+('Bracelet en or', 275, 0, 'Bracelet en or fabriqué par un artisan', 9, true, 'bracelet-en-or'),
+('Bracelet en argent', 129.99, 0, 'Bracelet en argent fabriqué par un artisan', 9, true, 'bracelet-en-argent'),
+('Bracelet en diamant', 295.99, 0, 'Bracelet en diamant fabriqué par un artisan', 9, true, 'bracelet-en-diamant'),
+
+
+('Collier en or', 59.99, 0, 'Collier en or fabriqué par un artisan', 8, true, 'collier-en-or'),
+('Collier en argent', 99.99, 0, 'Collier en argent fabriqué par un artisan', 8, true, 'collier-en-argent'),
+('Collier en diamant', 295, 0, 'Collier en diamant fabriqué par un artisan', 8, true, 'collier-en-diamant'),
+
+('Boucles d''oreilles en argent', 109.99, 0, 'Boucles d\'oreilles en argent fabriqué par un artisan', 10, true, 'boucles-d-oreilles-en-argent'),
+('Boucles d''oreilles en or', 79, 0, 'Boucles d''oreilles en or fabriqué par un artisan', 10, true, 'boucles-d-oreilles-en-or'),
+('Boucles d''oreilles en diamant', 69.79, 0, 'Boucles d''oreilles en diamant fabriqué par un artisan', 10, true, 'boucles-d-oreilles-en-diamant'),
+
+('Bague en argent', 149, 0, 'Bague en argent fabriqué par un artisan', 7, true, 'bague-en-argent'),
+('Bague en or', 476.89, 0, 'Bague en or fabriqué par un artisan', 7, true, 'bague-en-or'),
+('Bague en diamant', 289.75, 0, 'Bague en diamant fabriqué par un artisan', 7, true, 'bague-en-diamant'),
+
+('Montre en or', 125.60, 'Montre en or fabriqué par un artisan', 6, true, 'montre-en-or'),
+('Montre en argent', 75.89, 'Montre en argent fabriqué par un artisan', 6, true, 'montre-en-argent'),
+('Montre en diamant', 99.99, 'Montre en diamant fabriqué par un artisan', 6, true, 'montre-en-diamant');
+

@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import instance from '../../http/http';
 import { AuthContext } from '../../context/UserContext';
+import Item from './item/Item';
 
 const Navigation = () => {
 
@@ -15,6 +16,7 @@ const Navigation = () => {
   const [isSubNavigationOpen, setIsSubNavigationOpen] = useState<boolean>(false)
 
   const { isUserConnected, logout } = useContext(AuthContext)
+
 
   // const notifyNavigation = (message: string, type: string) => {
   //   switch(type) {
@@ -62,8 +64,18 @@ const Navigation = () => {
         <img src={logo} alt="Logo Photographe" className="logo" />
       </div>
       <nav className='navigation'>
-        <Link className={isActiveNavLink === "/" ? "link-navigation active-link" : "link-navigation"} to="/" title='Accueil'>Accueil</Link>
-        <Link className={isActiveNavLink === "/catalog" ? "link-navigation active-link" : "link-navigation"} to="/catalog" title='Produit'>Catalogue</Link>
+        <Item 
+          navType= 'navigation'
+          isActiveNavLink={isActiveNavLink}
+          name='Accueil'
+          path='/'
+        />
+        <Item 
+          navType= 'navigation'
+          isActiveNavLink={isActiveNavLink}
+          name='Catalogue'
+          path='/catalog'
+        />
         {
           isUserConnected ? 
           <div className="container-subnavigation" onClick={() => setIsSubNavigationOpen(!isSubNavigationOpen)}>
@@ -71,23 +83,37 @@ const Navigation = () => {
             <ul className={isSubNavigationOpen ? "list-subnavigation active" : "list-subnavigation"}>
               {
                 isUserConnected ? 
-                <li className="item-subnavigation">
-                  <Link className={isActiveNavLink === "/order" ? "link-navigation active-link" : "link-navigation"} to="/order" title='Commande'>Commandes</Link> 
-                </li> : 
+                <Item
+                  navType= 'subnavigation'
+                  isActiveNavLink={isActiveNavLink}
+                  name='Commandes'
+                  path='/order'
+                /> :
                 null
               }
               {
                 isUserConnected ? 
-                <li className="item-subnavigation">
-                  <p className='btn-logout link-navigation' onClick={logout}>Déconnexion</p>
-                </li> : 
-                <li className="item-subnavigation">
-                  <Link to='/authentification' className={isActiveNavLink === "/" ? "link-navigation active-link" : "link-navigation"}>Connexion</Link>
-                </li>
+                <Item
+                  navType= 'logout'
+                  isActiveNavLink={isActiveNavLink}
+                  name='Déconnexion'
+                  path='/'
+                /> :
+                <Item
+                  navType= 'subnavigation'
+                  isActiveNavLink={isActiveNavLink}
+                  name='Connexion'
+                  path='/authentification'
+                />
               }
             </ul>
           </div> : 
-          <Link className={isActiveNavLink === "/authentification" ? "link-navigation active-link" : "link-navigation"} to="/authentification" title='Connexion'>Connexion</Link>
+          <Item
+            navType= 'navigation'
+            isActiveNavLink={isActiveNavLink}
+            name='Connexion'
+            path='/authentification'
+          />
         }
       </nav>
       
