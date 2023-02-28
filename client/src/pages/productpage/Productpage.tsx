@@ -5,20 +5,21 @@ import { imageInterface, productInterface } from '../../types/interface/index'
 import PopupImage from '../../components/product/popupImage/popupImage'
 import instance from '../../http/http'
 import { AuthContext } from '../../context/UserContext'
+import { ProductContext } from '../../context/ProductContext'
 
 
 const Productpage: React.FC = () => {
   const params = useParams()
-  const [product, setProduct] = useState<productInterface[]>()
+
   const [image, setImage] = useState<imageInterface[]>()
   const [popupImage, setPopupImage] = useState<boolean>(false)
   const navigateProduct = useNavigate()
+
   const { isUserConnected } = useContext(AuthContext)
+  const { getProduct, product } = useContext(ProductContext)
 
   useEffect(() => {
-    instance.get(`/api/product/${params.id}`)
-    .then(res => setProduct(res.data))
-    .catch(err => console.log(err))
+    getProduct(params.id)
   }, [])
 
   // useEffect(() => {

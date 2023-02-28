@@ -63,3 +63,17 @@ export interface User {
   role: string;
 }
 
+// Interface Category Context
+export interface CategoryContextData {
+  categories: categoryInterface[] | undefined;
+  getCategories: () => void;
+}
+
+// Interface Product Context
+export interface ProductContextData {
+  products: productInterface[] | undefined;
+  getAllProducts: () => void;
+  product: productInterface[] | undefined;
+  getProduct: (slug: string | undefined) => void;
+}
+

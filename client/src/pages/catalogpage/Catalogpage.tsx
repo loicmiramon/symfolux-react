@@ -1,54 +1,31 @@
 import React, { useEffect, useState, useContext } from "react"
 import Navigation from "../../components/navigation/Navigation"
 import Card from "../../components/catalog/card/Card"
-import { categoryInterface, imageInterface, productInterface } from '../../types/interface/index'
-import instance from '../../http/http';
-import { useNavigate } from 'react-router-dom';
+import { imageInterface } from '../../types/interface/index'
 import { AuthContext } from "../../context/UserContext";
+import { CategoryContext } from "../../context/CategoryContext";
+import { ProductContext } from "../../context/ProductContext";
 
 const Catalogpage: React.FC = () => {
   
-  const [products, setProducts] = useState<productInterface[]>()
-  const [category, setCategory] = useState<categoryInterface[]>()
   const [images, setImages] = useState<imageInterface[]>()
 
-  const navigate = useNavigate();
   const { detectUser, isUserConnected, user } = useContext(AuthContext)
+  const { categories, getCategories } = useContext(CategoryContext) 
+  const { products, getAllProducts } = useContext(ProductContext)
 
 
   useEffect(() => {
-    instance.get('/api/product/category')
-    .then((res) => setCategory(res.data))
-    .catch((err) => console.log("GET CATEGORY", err))
-  }, [category])
+    getCategories()
+  }, [categories])
   
   useEffect(() => {
-    instance.get('/api/product')
-    .then((res) => setProducts(res.data))
-    .catch((err) => console.log("GET PRODUCT", err))
+    getAllProducts()
+
   }, [products])
   
   useEffect(() => {
     detectUser()
-    // instance.get('/api/auth/me').then(res => {
-    //   if(res.data) {
-    //     setUser(true)
-    //     console.log('Vous êtes connecté')
-    //   } else {
-    //     setUser(false)
-    //     console.log('Vous n\'êtes pas connecté')
-    //   }
-    // }).catch(err => {
-    //   if (err.response && err.response.status === 401) {
-    //     console.log("Vous n'êtes pas connecté")
-    //     navigate('/authentification')
-    //   } else {
-    //     console.log("Erreur lors de la récupération de l'utilisateur connecté : ", err)
-    //   }
-    // })
-
-
-
   }, [ isUserConnected])
 
   return (
@@ -58,7 +35,7 @@ const Catalogpage: React.FC = () => {
         <h1 className="title-catalog">Nos Produits</h1>
         <div className="container-catalog">
           {
-            category?.map((cat) => (
+            categories?.map((cat) => (
               cat.activation &&
                 <div key={cat.id} className="container-card">
                   {

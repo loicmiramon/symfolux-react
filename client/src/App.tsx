@@ -9,6 +9,8 @@ import Basketpage from './pages/basket/Basketpage'
 import Authentificationpage from './pages/authentificationpage/Authentificationpage'
 import Registerpage from './pages/registerpage/Registerpage'
 import { AuthProvider } from './context/UserContext'
+import { CategoryProvider } from './context/CategoryContext'
+import { ProductProvider } from './context/ProductContext'
 
 function App() {
 
@@ -16,18 +18,22 @@ function App() {
 
   return (
     <AuthProvider>
-      <div className="App">
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/catalog' element={<Catalogpage />} />
-          <Route path="/account" element={<Accountpage />} />
-          <Route path="/order" element={<Order />} />
-          <Route path="/product/:id" element={<Productpage />} />
-          <Route path="/basket" element={<Basketpage />} />
-          <Route path="/authentification" element={<Authentificationpage />} />
-          <Route path="/register" element={<Registerpage />} />
-        </Routes>
-      </div>
+      <CategoryProvider>
+        <ProductProvider>
+          <div className="App">
+            <Routes>
+              <Route path='/' element={<Homepage />} />
+              <Route path='/catalog' element={<Catalogpage />} />
+              <Route path="/account" element={<Accountpage />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/product/:id" element={<Productpage />} />
+              <Route path="/basket" element={<Basketpage />} />
+              <Route path="/authentification" element={<Authentificationpage />} />
+              <Route path="/register" element={<Registerpage />} />
+            </Routes>
+          </div>
+        </ProductProvider>
+      </CategoryProvider>
     </AuthProvider>
   );
 }
